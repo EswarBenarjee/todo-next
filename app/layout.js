@@ -6,6 +6,9 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { useState } from "react";
+import Provider from "components/Provider";
+
 import NavbarComponent from "./Navbar";
 
 export const metadata = {
@@ -14,11 +17,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const [user, setUser] = useState(null);
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavbarComponent />
-        {children}
+        <Provider>
+          <NavbarComponent />
+          {children}
+        </Provider>
       </body>
     </html>
   );

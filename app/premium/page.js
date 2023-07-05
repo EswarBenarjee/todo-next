@@ -79,7 +79,7 @@ function premium() {
 
               <Card.Text>
                 <Button variant="primary" className="w-100">
-                  Take Premium
+                  Buy Premium
                 </Button>
               </Card.Text>
             </Card.Body>

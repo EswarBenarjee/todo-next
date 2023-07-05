@@ -13,15 +13,15 @@ export default function Home() {
   const [todos, setTodos] = useState([
     {
       id: 1,
-      text: "Example To Do",
+      text: "Example To Do 1",
     },
     {
       id: 2,
-      text: "Example To Do",
+      text: "Example To Do 2",
     },
     {
       id: 3,
-      text: "Example To Do",
+      text: "Example To Do 3",
     },
   ]);
 
@@ -48,7 +48,7 @@ export default function Home() {
   const updateTodo = (id) => {
     const todoItem = todos.filter((todo) => {
       if (todo.id === id) {
-        return todo.text;
+        return todo;
       }
     });
 
@@ -56,14 +56,16 @@ export default function Home() {
   };
 
   const deleteTodo = (id) => {
-    console.log(id);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   const addTodo = (e) => {
     e.preventDefault();
-    setTodos([...todos, { id: todos.length, text: input }]);
-    setInput("");
+
+    if (input) {
+      setTodos([...todos, { id: todos.length + 1, text: input }]);
+      setInput("");
+    }
   };
 
   const checkHasPremium = () => {

@@ -1,3 +1,5 @@
+"use client";
+
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -11,6 +13,8 @@ export const metadata = {
   title: "To Do Application",
   description: "A simple To Do Application which uses Next.js and MongoDB.",
 };
+
+import { useState, useEffect } from "react";
 
 export default function RootLayout({ children }) {
   return (

@@ -6,22 +6,8 @@ import Navbar from "react-bootstrap/Navbar";
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-// import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
-function NavbarComponent({ isLoggedIn }) {
-  isLoggedIn = false;
-
-  // const [providers, setProviders] = useState(null);
-
-  // useEffect(() => {
-  //   const setProviders = async () => {
-  //     const response = await getProviders();
-  //     setProviders(response);
-  //   };
-
-  //   setProviders();
-  // }, []);
-
+function NavbarComponent() {
   return (
     <>
       <Navbar bg="primary" data-bs-theme="dark">
@@ -46,22 +32,30 @@ function NavbarComponent({ isLoggedIn }) {
                 Home
               </Link>
             </button>
-            {/* {isLoggedIn ? (
-              <button type="button" onClick={signOut} className="NavbarButton">
-                Sign Out
+            {/* 
+            {isLoggedIn ? (
+              <button className="NavbarButton mx-2">
+                <Link
+                  href="/login"
+                  className="text-white"
+                  style={{ textDecoration: "none !important" }}
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                  }}
+                >
+                  Logout
+                </Link>
               </button>
             ) : (
-              providers &&
-              Object.values(providers).map((provider) => (
-                <button
-                  className="NavbarButton"
-                  type="button"
-                  key={provider.name}
-                  onClick={() => signIn(provider.id)}
+              <button className="NavbarButton mx-2">
+                <Link
+                  href="/login"
+                  className="text-white"
+                  style={{ textDecoration: "none !important" }}
                 >
-                  Sign In
-                </button>
-              ))
+                  Login
+                </Link>
+              </button>
             )} */}
           </Nav>
         </Container>

@@ -15,6 +15,8 @@ import toast from "react-hot-toast";
 export default function Login() {
   const { push } = useRouter();
 
+  if (localStorage.getItem("token")) push("/");
+
   const [user, setUser] = useState({
     username: "",
     password: "",

@@ -12,6 +12,8 @@ import { useRouter } from "next/navigation";
 
 import toast from "react-hot-toast";
 
+import NavbarComponent from "../Navbar";
+
 export default function Login() {
   const { push } = useRouter();
 
@@ -67,73 +69,78 @@ export default function Login() {
   };
 
   return (
-    <main>
-      <Container style={{ minHeight: "80vh" }} className="mt-5">
-        <Row className="d-flex justify-content-around align-items-center h-100">
-          <Col
-            xs={12}
-            md={6}
-            className="py-5 py-md-2 d-flex justify-content-around align-items-center"
-          >
-            <img
-              data-aos="fade-zoom-in"
-              src="./login.png"
-              alt="Login"
-              className="w-50 w-md-100"
-            />
-          </Col>
-          <Col xs={12} md={6} className="p-5 py-md-2">
-            <Form
-              onSubmit={(e) => (buttonDisabled ? e.preventDefault() : login(e))}
+    <div>
+      <NavbarComponent />
+      <main className="text-center p-5">
+        <Container style={{ minHeight: "80vh" }} className="mt-5">
+          <Row className="d-flex justify-content-around align-items-center h-100">
+            <Col
+              xs={12}
+              md={6}
+              className="py-5 py-md-2 d-flex justify-content-around align-items-center"
             >
-              <h3 className="text-center mb-4">
-                {loading ? "Processing..." : "Login"}
-              </h3>
+              <img
+                data-aos="fade-zoom-in"
+                src="./login.png"
+                alt="Login"
+                className="w-50 w-md-100"
+              />
+            </Col>
+            <Col xs={12} md={6} className="p-5 py-md-2">
+              <Form
+                onSubmit={(e) =>
+                  buttonDisabled ? e.preventDefault() : login(e)
+                }
+              >
+                <h3 className="text-center mb-4">
+                  {loading ? "Processing..." : "Login"}
+                </h3>
 
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Username"
-                  onChange={(e) =>
-                    setUser({
-                      ...user,
-                      username: e.target.value,
-                    })
-                  }
-                />
-              </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Username"
+                    onChange={(e) =>
+                      setUser({
+                        ...user,
+                        username: e.target.value,
+                      })
+                    }
+                  />
+                </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  onChange={(e) =>
-                    setUser({
-                      ...user,
-                      password: e.target.value,
-                    })
-                  }
-                />
-              </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) =>
+                      setUser({
+                        ...user,
+                        password: e.target.value,
+                      })
+                    }
+                  />
+                </Form.Group>
 
-              <div className="d-flex justify-content-center">
-                <Button
-                  variant="outline-primary"
-                  className="me-4 w-25"
-                  onClick={() => push("/register")}
-                >
-                  Register
-                </Button>
-                <Button variant="primary" type="submit" className=" w-25">
-                  {buttonDisabled ? "No Login" : "Login"}
-                </Button>
-              </div>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </main>
+                <div className="d-flex justify-content-center">
+                  <Button
+                    variant="outline-primary"
+                    className="me-4 w-25"
+                    onClick={() => push("/register")}
+                  >
+                    Register
+                  </Button>
+                  <Button variant="primary" type="submit" className=" w-25">
+                    {buttonDisabled ? "No Login" : "Login"}
+                  </Button>
+                </div>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      </main>
+    </div>
   );
 }

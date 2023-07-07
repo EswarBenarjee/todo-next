@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import NavbarComponent from "./Navbar";
 import { Toaster } from "react-hot-toast";
 
 export const metadata = {
@@ -17,7 +16,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Toaster />
-        <NavbarComponent />
         {children}
       </body>
     </html>

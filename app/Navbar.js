@@ -7,7 +7,19 @@ import Navbar from "react-bootstrap/Navbar";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+import { useRouter } from "next/navigation";
+
 function NavbarComponent() {
+  const { push } = useRouter();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    }
+  });
+
   return (
     <>
       <Navbar bg="primary" data-bs-theme="dark">
@@ -26,21 +38,34 @@ function NavbarComponent() {
             <button className="NavbarButton mx-2">
               <Link
                 href="/"
-                style={{ textDecoration: "none !important" }}
                 className="text-white"
+                style={{ textDecoration: "none !important" }}
               >
                 Home
               </Link>
             </button>
-            {/* 
+
+            <button className="NavbarButton mx-2">
+              <Link
+                href="/premium"
+                className="text-white"
+                style={{ textDecoration: "none !important" }}
+              >
+                Premium
+              </Link>
+            </button>
+
             {isLoggedIn ? (
               <button className="NavbarButton mx-2">
                 <Link
                   href="/login"
                   className="text-white"
                   style={{ textDecoration: "none !important" }}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     localStorage.removeItem("token");
+                    setIsLoggedIn(false);
+                    push("/login");
                   }}
                 >
                   Logout
@@ -56,7 +81,7 @@ function NavbarComponent() {
                   Login
                 </Link>
               </button>
-            )} */}
+            )}
           </Nav>
         </Container>
       </Navbar>

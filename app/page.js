@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BiSolidEditAlt } from "react-icons/bi";
 
+import NavbarComponent from "./Navbar";
+
 import { useRouter } from "next/navigation";
 
 import toast from "react-hot-toast";
@@ -214,73 +216,76 @@ export default function Home() {
   };
 
   return (
-    <main className="text-center p-5">
-      <h1 className={hasPremium ? "premiumText mb-5" : "text-warning mb-5"}>
-        To Do Application
-      </h1>
+    <div>
+      <NavbarComponent />
+      <main className="text-center p-5">
+        <h1 className={hasPremium ? "premiumText mb-5" : "text-warning mb-5"}>
+          To Do Application
+        </h1>
 
-      {edit.id ? (
-        <form onSubmit={submitUpdate}>
-          <input
-            type="text"
-            value={edit.value}
-            onChange={(e) =>
-              setEdit({
-                id: edit.id,
-                value: e.target.value,
-              })
-            }
-            className="todoInput"
-          />
-          <button type="submit" className="todoSubmit ms-2">
-            Update
-          </button>
-        </form>
-      ) : (
-        <div>
-          <form onSubmit={(e) => (loading ? e.preventDefault() : addTodo(e))}>
+        {edit.id ? (
+          <form onSubmit={submitUpdate}>
             <input
               type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              value={edit.value}
+              onChange={(e) =>
+                setEdit({
+                  id: edit.id,
+                  value: e.target.value,
+                })
+              }
               className="todoInput"
             />
             <button type="submit" className="todoSubmit ms-2">
-              {loading ? "loading" : "Add"}
+              Update
             </button>
           </form>
+        ) : (
+          <div>
+            <form onSubmit={(e) => (loading ? e.preventDefault() : addTodo(e))}>
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="todoInput"
+              />
+              <button type="submit" className="todoSubmit ms-2">
+                {loading ? "loading" : "Add"}
+              </button>
+            </form>
 
-          <div className="todo-row">
-            {loading ? (
-              <div className="text-center">
-                <div className="spinner-border text-success" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-              </div>
-            ) : (
-              todos.map((todo, index) => (
-                <div key={todo._id} className="todo-item p-2 row">
-                  <div className="todo-text col-9">{todo.name}</div>
-                  <div className="todo-icons col-3">
-                    <BiSolidEditAlt
-                      onClick={() => {
-                        if (checkHasPremium()) updateTodo(todo._id);
-                        else push("/premium");
-                      }}
-                    />
-
-                    <AiFillDelete
-                      onClick={() => {
-                        deleteTodo(todo._id);
-                      }}
-                    />
+            <div className="todo-row">
+              {loading ? (
+                <div className="text-center">
+                  <div className="spinner-border text-success" role="status">
+                    <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
-              ))
-            )}
+              ) : (
+                todos.map((todo, index) => (
+                  <div key={todo._id} className="todo-item p-2 row">
+                    <div className="todo-text col-9">{todo.name}</div>
+                    <div className="todo-icons col-3">
+                      <BiSolidEditAlt
+                        onClick={() => {
+                          if (checkHasPremium()) updateTodo(todo._id);
+                          else push("/premium");
+                        }}
+                      />
+
+                      <AiFillDelete
+                        onClick={() => {
+                          deleteTodo(todo._id);
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
-        </div>
-      )}
-    </main>
+        )}
+      </main>
+    </div>
   );
 }

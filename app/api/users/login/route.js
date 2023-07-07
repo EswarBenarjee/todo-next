@@ -3,7 +3,6 @@ import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 
 import jwt from "jsonwebtoken";
-import { setCookie } from "cookies-next";
 
 connect();
 

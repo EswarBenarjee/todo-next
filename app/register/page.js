@@ -77,7 +77,7 @@ export default function Register() {
 
   return (
     <div>
-      <NavbarComponent />
+      <NavbarComponent currentPage="register" />
 
       <main className="text-center p-5">
         <Container style={{ minHeight: "80vh" }} className="mt-5">

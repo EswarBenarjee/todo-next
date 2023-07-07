@@ -19,7 +19,14 @@ export async function POST(request) {
     const user = await User.findById(decoded.tokenData.id);
 
     if (!user) {
-      return NextResponse.json({ error: "Invalid User" }, { status: 401 });
+      return NextResponse.json({ error: "Invalid User" }, { status: 400 });
+    }
+
+    if (user.todoItems.length >= 3) {
+      return NextResponse.json(
+        { error: "You have reached the maximum number of todos" },
+        { status: 400 }
+      );
     }
 
     user.todoItems.unshift({ name });

@@ -158,9 +158,9 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.error) {
-          toast.error(data.error);
-        }
+        // if (data.error) {
+        //   toast.error(data.error);
+        // }
 
         if (data.error === "Invalid User") {
           setLoading(false);
@@ -189,9 +189,9 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.error) {
-          toast.error(data.error);
-        }
+        // if (data.error) {
+        //   toast.error(data.error);
+        // }
 
         if (data.error === "Invalid User") {
           push("/login");

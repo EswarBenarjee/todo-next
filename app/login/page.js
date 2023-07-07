@@ -70,7 +70,7 @@ export default function Login() {
 
   return (
     <div>
-      <NavbarComponent />
+      <NavbarComponent currentPage="login" />
       <main className="text-center p-5">
         <Container style={{ minHeight: "80vh" }} className="mt-5">
           <Row className="d-flex justify-content-around align-items-center h-100">

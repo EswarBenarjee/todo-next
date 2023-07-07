@@ -9,71 +9,17 @@ import { BiRupee } from "react-icons/bi";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
-import toast from "react-hot-toast";
 
 import NavbarComponent from "../Navbar";
 
-export default function premium() {
+function pricing() {
   const { push } = useRouter();
-
-  const [hasPremium, setHasPremium] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/premium/check", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: localStorage.getItem("token"),
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error === "Invalid User") {
-          push("/login");
-        }
-
-        if (data.success) {
-          setHasPremium(data.hasPremium);
-        }
-      })
-      .catch((err) => {
-        toast.error("Server Error");
-      });
-  }, []);
-
-  const takePremium = () => {
-    fetch("/api/payment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: localStorage.getItem("token"),
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error === "Invalid User") {
-          push("/login");
-        }
-
-        if (data.success) {
-          window.location.assign(data.url);
-        }
-      })
-      .catch((err) => {
-        toast.error("Server Error");
-      });
-  };
 
   return (
     <div>
-      <NavbarComponent />
+      <NavbarComponent currentPage="pricing" />
+
       <main className="text-center p-5">
         <Container className="p-5">
           <h2 className="mb-5">Choose The Best Plan For You</h2>
@@ -154,26 +100,14 @@ export default function premium() {
                     Unlimited Todos
                   </Card.Text>
 
-                  <Card.Text
-                    style={hasPremium ? { textDecoration: "line-through" } : {}}
-                  >
+                  <Card.Text>
                     <BiRupee className="me-2" />
                     10
                   </Card.Text>
 
                   <Card.Text>
-                    <Button
-                      variant={hasPremium ? "outline-primary" : "primary"}
-                      className="w-100"
-                      onClick={() => {
-                        if (!hasPremium) {
-                          takePremium();
-                        }
-                      }}
-                    >
-                      {hasPremium
-                        ? "Premium Plan Activated"
-                        : "Activate Premium"}
+                    <Button variant="primary" className="w-100">
+                      Activate Premium Plan
                     </Button>
                   </Card.Text>
                 </Card.Body>
@@ -185,3 +119,5 @@ export default function premium() {
     </div>
   );
 }
+
+export default pricing;

@@ -6,31 +6,59 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+import { useState, useEffect } from "react";
+
 import { useRouter } from "next/navigation";
+
+import toast from "react-hot-toast";
 
 export default function Login() {
   const { push } = useRouter();
 
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (user.username.length > 0 && user.password.length > 0) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user]);
+
   const login = (e) => {
     e.preventDefault();
 
-    // Get username and password
-    const username = e.target[0].value;
-    const password = e.target[1].value;
+    setLoading(true);
 
-    // Send request to server
-    fetch("http://localhost:5000/api/auth/", {
+    fetch("/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify(user),
     })
       .then((res) => res.json())
       .then((data) => {
-        // Save token to local storage
+        setLoading(false);
+
+        if (data.error) {
+          return toast.error(data.error);
+        }
+
         localStorage.setItem("token", data.token);
-        console.log(data.token);
+        toast.success("Login successful");
+        push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.message);
+        setLoading(false);
       });
   };
 
@@ -51,29 +79,51 @@ export default function Login() {
             />
           </Col>
           <Col xs={12} md={6} className="p-5 py-md-2">
-            <Form onSubmit={login}>
-              <h3 className="text-center mb-4">Login</h3>
+            <Form
+              onSubmit={(e) => (buttonDisabled ? e.preventDefault() : login(e))}
+            >
+              <h3 className="text-center mb-4">
+                {loading ? "Processing..." : "Login"}
+              </h3>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Enter Username" />
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Username"
+                  onChange={(e) =>
+                    setUser({
+                      ...user,
+                      username: e.target.value,
+                    })
+                  }
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  onChange={(e) =>
+                    setUser({
+                      ...user,
+                      password: e.target.value,
+                    })
+                  }
+                />
               </Form.Group>
 
               <div className="d-flex justify-content-center">
                 <Button
-                  variant="primary"
+                  variant="outline-primary"
                   className="me-4 w-25"
                   onClick={() => push("/register")}
                 >
                   Register
                 </Button>
                 <Button variant="primary" type="submit" className=" w-25">
-                  Submit
+                  {buttonDisabled ? "No Login" : "Login"}
                 </Button>
               </div>
             </Form>

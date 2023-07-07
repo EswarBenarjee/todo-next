@@ -137,3 +137,9 @@ body {
 .todo-item svg {
   color: orangered;
 }
+
+.premiumText {
+  background: -webkit-linear-gradient(yellow, red, orange);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -7,7 +7,7 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: true,
+      required: [true, "Please provide a username"],
       unique: true,
       trim: true,
       minlength: 3,
@@ -16,7 +16,7 @@ const userSchema = new Schema(
     },
     encry_password: {
       type: String,
-      required: true,
+      required: [true, "Please provide a password"],
     },
     has_premium: {
       type: Boolean,
@@ -34,7 +34,7 @@ const userSchema = new Schema(
         },
         name: {
           type: String,
-          required: true,
+          required: [true, "Please provide a ToDo Item name"],
           trim: true,
         },
       },

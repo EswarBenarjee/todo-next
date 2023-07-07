@@ -5,6 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import NavbarComponent from "./Navbar";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "To Do Application",
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Toaster />
         <NavbarComponent />
         {children}
       </body>

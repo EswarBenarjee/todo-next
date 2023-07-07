@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 
 // @route   POST api/todo-items
-// @desc    UPDATE todo item
+// @desc    Add todo item
 // @access  Private
 router.post(
   "/",

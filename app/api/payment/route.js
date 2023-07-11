@@ -20,7 +20,8 @@ export async function POST(request) {
     const user = await User.findById(decoded.tokenData.id);
 
     if (!user) {
-      return NextResponse.json({ error: "Invalid User" }, { status: 401 });
+      console.log("Invalid User");
+      return NextResponse.json({ error: "Invalid User" }, { status: 400 });
     }
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -33,8 +34,8 @@ export async function POST(request) {
         },
       ],
       mode: "payment",
-      success_url: "https://todo-mern-chi.vercel.app//payment?success=true",
-      cancel_url: "https://todo-mern-chi.vercel.app//payment?canceled=true",
+      success_url: `https://todo-mern-chi.vercel.app/stripe/success/${user.id}`,
+      cancel_url: "https://todo-mern-chi.vercel.app/premium/cancel/",
       client_reference_id: user._id.toString(),
     });
 
@@ -43,6 +44,7 @@ export async function POST(request) {
       url: session.url,
     });
   } catch (err) {
+    console.log(err);
     return NextResponse.json({ error: err }, { status: 500 });
   }
 }

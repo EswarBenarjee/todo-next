@@ -45,7 +45,7 @@ export default function Stripe({ params: { userId } }) {
       <NavbarComponent />
       <main className="text-center p-5">
         <h1>Payment Gateway</h1>
-        <img src="/favicon.ico" alt="To Do Application" />
+        <img src="/payment.png" alt="To Do Application" className="img-fluid" />
       </main>
     </div>
   );

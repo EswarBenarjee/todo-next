@@ -143,3 +143,14 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.img-fluid {
+  height: 50vh !important;
+}
+
+@media (max-width: 768px) {
+  .img-fluid {
+    height: auto !important;
+    width: 50vw !important;
+  }
+}

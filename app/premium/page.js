@@ -71,6 +71,35 @@ export default function premium() {
       });
   };
 
+  const revertPremium = () => {
+    if (!hasPremium) return;
+
+    fetch("/api/premium/revert", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: localStorage.getItem("token"),
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error === "Invalid User") {
+          push("/login");
+        }
+
+        if (data.success) {
+          toast.success("Reverted to Basic Plan");
+          toast.success("Refund will be initiated soon");
+          setHasPremium(false);
+        }
+      })
+      .catch((err) => {
+        toast.error("Server Error");
+      });
+  };
+
   return (
     <div>
       <NavbarComponent />
@@ -115,8 +144,14 @@ export default function premium() {
                   </Card.Text>
 
                   <Card.Text>
-                    <Button variant="outline-primary" className="w-100">
-                      Basic Plan Activated
+                    <Button
+                      variant={hasPremium ? "primary" : "outline-primary"}
+                      onClick={revertPremium}
+                      className="w-100"
+                    >
+                      {hasPremium
+                        ? "Revert back to Basic Plan"
+                        : "Basic Plan Activated"}
                     </Button>
                   </Card.Text>
                 </Card.Body>

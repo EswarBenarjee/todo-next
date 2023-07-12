@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 import NavbarComponent from "../../../Navbar";
 
 import { useRouter } from "next/navigation";
-import { Nav } from "react-bootstrap";
 
 export default function Stripe({ params: { userId } }) {
   const { push } = useRouter();

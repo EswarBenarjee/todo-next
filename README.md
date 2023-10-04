@@ -1,34 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TODO using NEXT JS & STRAPI
 
-## Getting Started
+> A simple TODO app using NEXT JS for client and server side rendering, MongoDB as database and STRAPI for payment Integration.
 
-First, run the development server:
+## Instructions:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Open the URL: https://todo-next-blond.vercel.app/
+- Create a new account or login with existing account.
+- Add a new task by clicking on the add button.
+- Click on the delete button to delete the task.
+- Click on the edit button to edit the task.
+- Premium is required to Edit a task.
+- Click on the premium button to pay for premium.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Tech Stack used:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- NEXT JS
+- MongoDB
+- Strapi
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Follow for more:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+> [Eswar Benarjee Github Profile](https://github.com/EswarBenarjee/todo-next "Eswar Benarjee")
